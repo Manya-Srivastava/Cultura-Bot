@@ -18,60 +18,60 @@ function moveRight() {
     }
 }
 document.addEventListener('DOMContentLoaded', () => {
-    const sendButton = document.getElementById('send-button');
-    const chatInput = document.getElementById('chat-input');
-    const chatContainer = document.querySelector('.chat-container');
-    const chatbotWidget = document.querySelector('.chatbot-widget');
+    const chatbox = document.querySelector('.chatbox');
+    const overlay = document.querySelector('.black-shadow-overlay');
     const contentWrapper = document.querySelector('.content-wrapper');
-    const shadowOverlay = document.createElement('div');
-    shadowOverlay.className = 'black-shadow-overlay';
-    document.body.appendChild(shadowOverlay);
-
-    // Function to append a message to the chat
-    function appendMessage(text, isBot = false) {
-        const messageElement = document.createElement('div');
-        messageElement.className = isBot ? 'message bot-message' : 'message user-message';
-        messageElement.innerHTML = `
-            <div class="sender-label">${isBot ? 'Bot' : 'User'}</div>
-            <p>${text}</p>
-        `;
-        chatContainer.appendChild(messageElement);
-        chatContainer.scrollTop = chatContainer.scrollHeight; // Scroll to bottom
-    }
-
-    // Event listener for send button
-    sendButton.addEventListener('click', () => {
-        const userInput = chatInput.value.trim();
-        if (userInput) {
-            appendMessage(userInput, false); 
-            chatInput.value = ''; 
-
-            setTimeout(() => {
-                appendMessage(`You said: ${userInput}`, true); 
-            }, 500);
-        }
-    });
-
-    // Send message on pressing Enter key
-    chatInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            e.preventDefault();
-            sendButton.click();
-        }
-    });
-
-    // Toggle chatbot widget on click
-    chatbotWidget.addEventListener('click', () => {
-        chatbotWidget.classList.toggle('active'); 
-        document.body.classList.toggle('active');
-        contentWrapper.classList.toggle('blur-background');
-    });
 
     // Close chatbot when clicking outside (shadow overlay)
-    shadowOverlay.addEventListener('click', () => {
-        chatbotWidget.classList.remove('active');
+    overlay.addEventListener('click', () => {
+        chatbox.classList.remove('active');
         document.body.classList.remove('active');
         contentWrapper.classList.remove('blur-background');
     });
+
+    // Add chatbox click event to toggle visibility
+    chatbox.addEventListener('click', () => {
+        chatbox.classList.toggle('active');
+        document.body.classList.toggle('active');
+        contentWrapper.classList.toggle('blur-background');
+    });
 });
 
+function sendMessage() {
+    const userMessage = document.getElementById('userMessage').value;
+    
+    if (userMessage.trim() !== "") {
+      // Create JSON for user message
+      const userMessageJson = {
+        "sender": "user",
+        "text": userMessage
+      };
+
+      // Display user message
+      displayMessage(userMessageJson);
+
+      // Clear input field
+      document.getElementById('userMessage').value = '';
+
+      // Simulate bot response
+      const botMessageJson = {
+        "sender": "bot",
+        "text": "This is an automated response to your message: " + userMessage
+      };
+
+      setTimeout(() => {
+        displayMessage(botMessageJson);
+      }, 1000); // Simulating delay for bot response
+    }
+  }
+
+  function displayMessage(messageJson) {
+    const chatboxBody = document.getElementById('chatbox-body');
+    const messageDiv = document.createElement('div');
+    messageDiv.classList.add('message', messageJson.sender);
+
+    messageDiv.textContent = messageJson.text;
+
+    chatboxBody.appendChild(messageDiv);
+    chatboxBody.scrollTop = chatboxBody.scrollHeight; // Scroll to the bottom
+  }

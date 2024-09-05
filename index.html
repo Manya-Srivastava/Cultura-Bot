@@ -80,84 +80,19 @@
     </footer>
   </div>
    <!-- Chatbot Widget -->
-   <div class="chatbot-widget">
-    <div class="message bot-message">
-                <div class="sender-label">Bot</div>
-                <p>Hello! How can I help you?</p>
-            </div>
-            <div class="message user-message">
-                <div class="sender-label">User</div>
-                <p>I want to book ticket for museum.</p>
-            </div>
-
-            <div class="message bot-message">
-              <div class="sender-label">Bot</div>
-              <p>What's your name?</p>
-          </div>
-          <div class="message user-message">
-              <div class="sender-label">User</div>
-              <p>My name is Param</p>
-          </div>
-
-            <div class="message bot-message">
-              <div class="sender-label">Bot</div>
-              <p>Which museum would you like to visit?</p>
-          </div>
-          <div class="message user-message">
-              <div class="sender-label">User</div>
-              <p>I would like to visit Calico Museum of Textiles.</p>
-          </div>
-
-            <div class="message bot-message">
-              <div class="sender-label">Bot</div>
-              <p>How many tickets do you need?</p>
-          </div>
-          <div class="message user-message">
-              <div class="sender-label">User</div>
-              <p>I need 6 tickets.</p>
-          </div>
-
-          <div class="message bot-message">
-            <div class="sender-label">Bot</div>
-            <p>What's your email address?</p>
-        </div>
-        <div class="message user-message">
-            <div class="sender-label">User</div>
-            <p>You can use param.saxena1717@gmail.com</p>
-        </div>
-
-        <div class="message bot-message">
-          <div class="sender-label">Bot</div>
-          <p>What's your phone number?</p>
-      </div>
-      <div class="message user-message">
-          <div class="sender-label">User</div>
-          <p>8120669944.</p>
-      </div>
-
-      <div class="message bot-message">
-        <div class="sender-label">Bot</div>
-        <p>Great! I have all the information to complete your booking. Here is Summary 
-          <br>Name: Param 
-          <br>Museum: Calico Museum of Textiles
-          <br>Tickets: 6
-          <br>Time: 11am
-          <br>Phone: 8120669944
-          <br>Email: param.saxena1717@gmail
-        </p>
+   <div class="chatbox">
+    <div class="chatbox-header">Chat with us!</div>
+    <div class="chatbox-body" id="chatbox-body">
+      <!-- Messages will appear here -->
     </div>
-    <div class="message user-message">
-        <div class="sender-label">User</div>
-        <p>Yes.</p>
+    <div class="chatbox-footer">
+      <input type="text" id="userMessage" placeholder="Type a message..." />
+      <button onclick="sendMessage()">Send</button>
     </div>
-
-    <div class="chat-input-box">
-      <input type="text" id="chat-input" placeholder="Type your message here..." />
-      <button id="send-button">Send</button>
   </div>
     </div>
   </div>
-
+  <div class="black-shadow-overlay"></div>
     <script src="script.js"></script>
 </body>
 </html>
